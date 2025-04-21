@@ -31,17 +31,9 @@ spec:
                 secretKeyRef:
                   name: auth-mongo-secret
                   key: mongodb-root-password
-            - name: MONGO_INITDB_DATABASE
-              value: ecommerce
           volumeMounts:
             - name: mongo-data
               mountPath: /data/db
-            - name: mongodb-init
-              mountPath: /docker-entrypoint-initdb.d
       volumes:
         - name: mongo-data
-          persistentVolumeClaim:
-            claimName: auth-db-mongo-pvc
-        - name: mongodb-init
-          configMap:
-            name: auth-db-mongo-init-configmap
+          emptyDir: {}
