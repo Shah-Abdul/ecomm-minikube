@@ -2,22 +2,35 @@
 # Create namespace if it doesn't exist
 kubectl create namespace ecommerce --dry-run=client -o yaml | kubectl apply -f -
 
+# Set your Docker environment to use the Minikube Docker daemon: In order to use local docker images of various services
+eval $(minikube docker-env)
+
+# Ensure that you build the images of hte services locally, and then push them to the Minikube docker daemon.
+
 # Create resources, in order:
 
 # Create secrets first
 kubectl apply -f ./auth-mongo-db/auth-mongo-secret.yaml -n ecommerce
+kubectl apply -f ./auth-service/auth-secrets.yaml -n ecommerce
 
 # Create config maps:
-kubectl apply -f ./auth-mongo-db/auth-db-mongo-init-configmap.yaml -n ecommerce
+kubectl apply -f ./auth-mongo-db/auth-DB-mongo-init-configmap.yaml -n ecommerce
 
 # Create PVC (Persistent volume Claim):
-kubectl apply -f ./auth-mongo-db/auth-db-mongo-pvc.yaml
+kubectl apply -f ./auth-mongo-db/auth-DB-mongo-pvc.yaml
 
 # Create MongoDB (for Auth) deployment and service:
 kubectl apply -f ./auth-mongo-db/auth-DB-mongo-deployment.yaml -n ecommerce
 kubectl apply -f ./auth-mongo-db/auth-DB-mongo-service.yaml -n ecommerce
 
+# Create auth service deployment and service
+kubectl apply -f ./auth-service/auth-deployment.yaml -n ecommerce
+kubectl apply -f ./auth-service/auth-service.yaml -n ecommerce
+
 # Access MongoDB from host machine (locally for testing):
 kubectl port-forward service/mongo 27017:27017 -n ecommerce
+
+# Access Auth Service from host machine (locally for testing):
+kubectl port-forward service/auth-service 5000:5000 -n ecommerce
 
 echo "All resources applied!"

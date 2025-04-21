@@ -1,0 +1,54 @@
+# auth-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-service
+  labels:
+    app: auth-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-service
+  template:
+    metadata:
+      labels:
+        app: auth-service
+    spec:
+      containers:
+        - name: auth-service
+          # image: ${YOUR_DOCKER_REGISTRY}/auth-service:latest
+          image: auth-service:latest
+          # Or use a local image when developing:
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 5000
+          env:
+            - name: PORT
+              value: "5000"
+            - name: MONGODB_URI
+              value: mongodb://$(MONGO_USERNAME):$(MONGO_PASSWORD)@mongodb:27017/ecommerce
+            - name: JWT_ACCESS_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: auth-secrets
+                  key: jwt-access-secret
+            - name: JWT_REFRESH_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: auth-secrets
+                  key: jwt-refresh-secret
+            - name: FRONTEND_URL
+              value: "http://localhost:3000"
+            - name: NODE_ENV
+              value: "production"
+            - name: MONGO_USERNAME
+              valueFrom:
+                secretKeyRef:
+                    name: auth-mongo-secret
+                    key: mongodb-username
+            - name: MONGO_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                    name: auth-mongo-secret
+                    key: mongodb-password
