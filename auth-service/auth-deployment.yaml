@@ -26,8 +26,6 @@ spec:
           env:
             - name: PORT
               value: "5000"
-            - name: MONGODB_URI
-              value: mongodb://$(MONGO_USERNAME):$(MONGO_PASSWORD)@mongodb:27017/ecommerce
             - name: JWT_ACCESS_SECRET
               valueFrom:
                 secretKeyRef:
@@ -46,9 +44,11 @@ spec:
               valueFrom:
                 secretKeyRef:
                     name: auth-mongo-secret
-                    key: mongodb-username
+                    key: mongodb-root-username
             - name: MONGO_PASSWORD
               valueFrom:
                 secretKeyRef:
                     name: auth-mongo-secret
-                    key: mongodb-password
+                    key: mongodb-root-password
+            - name: MONGODB_URI
+              value: mongodb://$(MONGO_USERNAME):$(MONGO_PASSWORD)@mongo:27017
