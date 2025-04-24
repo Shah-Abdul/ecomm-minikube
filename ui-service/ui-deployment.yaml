@@ -1,0 +1,32 @@
+# ui-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ui-service
+  labels:
+    app: ui-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ui-service
+  template:
+    metadata:
+      labels:
+        app: ui-service
+    spec:
+      containers:
+        - name: ui-service
+          # image: ${YOUR_DOCKER_REGISTRY}/ecomm-ui-service:latest
+          image: ecomm-ui-service:latest
+          # Or use a local image when developing:
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3000
+          env:
+            - name: PORT
+              value: "3000"
+            - name: NODE_ENV
+              value: "production"
+            - name: REACT_APP_AUTH_API_URL
+              value: "http://auth-service:5000"

@@ -21,4 +21,8 @@ kubectl apply -f ./auth-mongo-db/auth-DB-mongo-service.yaml -n ecommerce
 kubectl apply -f ./auth-service/auth-deployment.yaml -n ecommerce
 kubectl apply -f ./auth-service/auth-service.yaml -n ecommerce
 
+# Create UI service deployment and service
+kubectl apply -f ./ui-service/ui-deployment.yaml -n ecommerce
+kubectl apply -f ./ui-service/ui-service.yaml -n ecommerce
+
 echo "All resources applied!"
