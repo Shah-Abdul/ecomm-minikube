@@ -75,7 +75,7 @@ Access the UI at http://localhost:3000/
 
 ## Ports used by each service
 
-Since the application consists of multiple services deployed locally, we need to ensure that no 2 services use the same port. List of ports used and exposed by services is provided below. Please ensure that for any subsequent service/DB, a different port is used than the ones mentioned below:
+Since the application consists of multiple services deployed locally , we need to ensure that no 2 services use the same port. List of ports used and exposed by services is provided below. Please ensure that for any subsequent service/DB, a different port is used than the ones mentioned below:
 
 - DB for Authentication (MongoDB): 27017
 
