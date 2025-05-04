@@ -9,12 +9,15 @@ Deployment Wrapper for e-comm app using Minikube; contains yaml scripts for init
 - Clone all the repos for each service present in the system. These are:
   - [auth-service](https://github.com/Shah-Abdul/ecomm-auth-service/)
   - [ui-service](https://github.com/Shah-Abdul/ecomm-ui)
+  - [product-service](https://github.com/Saransh050600/ecomm-product-service)
 - Build the docker images of each of these services, and push to the local minikube image registry, by running the following steps for each service (example is for auth service):
 
 ```
     eval $(minikube docker-env) # To use the local docker env, and not an external registry
     docker build -t auth-service . # To build the docker image (ensure the service name given here is consistent with the image name mentioned in the corresponding deployment yaml)
+    docker build -t product-service .
     minikube image push auth-service # Push the built docker image to the local minikube registry.
+    minikube image push product-service
 ```
 
 **Note:** _These above 3 commands have been added as a script in the npm project for convenience, and can be executed by `npm run build:docker`_
@@ -69,6 +72,10 @@ kubectl  port-forward  service/mongo  27017:27017  -n  ecommerce
 
 kubectl  port-forward  service/auth-service  5000:5000  -n  ecommerce
 
+# Access Product Service from host machine (locally for testing):
+
+kubectl  port-forward  service/product-service  5001:5001  -n  ecommerce
+
 ```
 
 Access the UI at http://localhost:3000/
@@ -82,3 +89,6 @@ Since the application consists of multiple services deployed locally , we need t
 - Auth Service (Node): 5000
 
 - UI Service (React): 3000
+
+- Product Service (Node + Express):5001
+  
