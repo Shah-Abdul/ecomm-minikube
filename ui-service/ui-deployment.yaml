@@ -30,3 +30,6 @@ spec:
               value: "production"
             - name: REACT_APP_AUTH_API_URL
               value: "http://auth-service:5000"
+            - name: REACT_APP_API_URL
+              value: "http://product-service:5001"
+              
