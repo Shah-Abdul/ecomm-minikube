@@ -25,4 +25,8 @@ kubectl apply -f ./auth-service/auth-service.yaml -n ecommerce
 kubectl apply -f ./ui-service/ui-deployment.yaml -n ecommerce
 kubectl apply -f ./ui-service/ui-service.yaml -n ecommerce
 
+kubectl apply -f ./product-service/product-service-secret.yaml -n ecommerce
+kubectl apply -f ./product-service/product-service-deployment.yaml -n ecommerce
+kubectl apply -f ./product-service/product-service-service.yaml -n ecommerce
+
 echo "All resources applied!"
