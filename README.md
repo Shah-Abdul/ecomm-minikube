@@ -15,9 +15,7 @@ Deployment Wrapper for e-comm app using Minikube; contains yaml scripts for init
 ```
     eval $(minikube docker-env) # To use the local docker env, and not an external registry
     docker build -t auth-service . # To build the docker image (ensure the service name given here is consistent with the image name mentioned in the corresponding deployment yaml)
-    docker build -t product-service .
     minikube image push auth-service # Push the built docker image to the local minikube registry.
-    minikube image push product-service
 ```
 
 **Note:** _These above 3 commands have been added as a script in the npm project for convenience, and can be executed by `npm run build:docker`_
