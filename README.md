@@ -10,6 +10,7 @@ Deployment Wrapper for e-comm app using Minikube; contains yaml scripts for init
   - [auth-service](https://github.com/Shah-Abdul/ecomm-auth-service/)
   - [ui-service](https://github.com/Shah-Abdul/ecomm-ui)
   - [product-service](https://github.com/Saransh050600/ecomm-product-service)
+  - [payment-service](https://github.com/nikhilpalegar/ecom-paymentservice)
 - Build the docker images of each of these services, and push to the local minikube image registry, by running the following steps for each service (example is for auth service):
 
 ```
@@ -73,6 +74,14 @@ kubectl  port-forward  service/auth-service  5000:5000  -n  ecommerce
 # Access Product Service from host machine (locally for testing):
 
 kubectl  port-forward  service/product-service  5001:5001  -n  ecommerce
+
+# Access MongoDB for Product Service from host machine (locally for testing):
+
+kubectl  port-forward  service/mongo-service  27018:27018  -n  ecommerce
+
+# Access Payment Service from host machine (locally for testing):
+
+kubectl  port-forward  service/payment-service  3001:3001  -n  ecommerce
 
 ```
 

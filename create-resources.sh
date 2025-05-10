@@ -29,4 +29,10 @@ kubectl apply -f ./product-service/product-service-secret.yaml -n ecommerce
 kubectl apply -f ./product-service/product-service-deployment.yaml -n ecommerce
 kubectl apply -f ./product-service/product-service-service.yaml -n ecommerce
 
+#Create MongoDB and Payment service deployment and service
+kubectl apply -f ./payment-service/mongo-deployment.yaml -n ecommerce
+kubectl apply -f ./payment-service/mongo-service.yaml -n ecommerce
+kubectl apply -f ./payment-service/payment-deployment.yaml -n ecommerce
+kubectl apply -f ./payment-service/payment-service.yaml -n ecommerce
+
 echo "All resources applied!"
