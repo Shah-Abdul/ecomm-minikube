@@ -27,11 +27,11 @@ spec:
                 secretKeyRef:
                   name: order-service-secret
                   key: PORT
-            - name: MONGO_URI
+            - name: MONGODB_URI
               valueFrom:
                 secretKeyRef:
                   name: order-service-secret
-                  key: MONGO_URI
+                  key: MONGODB_URI
             - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:
@@ -42,23 +42,3 @@ spec:
                 secretKeyRef:
                   name: order-service-secret
                   key: FRONTEND_URL
-          readinessProbe:
-            httpGet:
-              path: /health
-              port: 5002
-            initialDelaySeconds: 5
-            periodSeconds: 10
-          livenessProbe:
-            httpGet:
-              path: /health
-              port: 5002
-            initialDelaySeconds: 10
-            periodSeconds: 20
-          resources:
-            requests:
-              memory: "128Mi"
-              cpu: "250m"
-            limits:
-              memory: "512Mi"
-              cpu: "500m"
-      restartPolicy: Always
