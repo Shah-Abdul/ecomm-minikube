@@ -11,6 +11,7 @@ Deployment Wrapper for e-comm app using Minikube; contains yaml scripts for init
   - [ui-service](https://github.com/Shah-Abdul/ecomm-ui)
   - [product-service](https://github.com/Saransh050600/ecomm-product-service)
   - [payment-service](https://github.com/nikhilpalegar/ecom-paymentservice)
+  - [order-service](https://github.com/aishwaryakchikorde/ecomm-order-service-main)
 - Build the docker images of each of these services, and push to the local minikube image registry, by running the following steps for each service (example is for auth service):
 
 ```
