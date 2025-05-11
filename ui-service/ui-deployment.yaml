@@ -32,6 +32,8 @@ spec:
               value: "http://auth-service:5000"
             - name: REACT_APP_API_URL
               value: "http://product-service:5001"
+            - name: REACT_CART_API_URL
+              value: "http://order-service:5002"  
             - name: REACT_APP_PAYMENT_API_URL
               value: "http://product-service:3001"
               
